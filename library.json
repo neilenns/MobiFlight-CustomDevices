@@ -1,0 +1,13 @@
+{
+    "name": "MobiFlight CustomDevices",
+    "version": "0.0.1",
+    "build":
+    {
+        "extraScript": "include.py"
+    }
+    "repository": 
+    {
+        "type": "git",
+        "url": "https://github.com/elral/MobiFlight-CustomDevices"
+    }
+}
