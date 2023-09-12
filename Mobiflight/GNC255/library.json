@@ -1,0 +1,17 @@
+{
+    "name": "MobiFlight GNC255",
+    "version": "0.0.1",
+    "keywords": "",
+    "description": "Controls LCD Displays for GNC255",
+    "include": "MobiFlight/GNC255",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/elral/MobiFlight-CustomDevices.git"
+    },
+    "dependencies":
+    {
+    },
+    "frameworks": "arduino",
+    "platforms": "*"
+  }
