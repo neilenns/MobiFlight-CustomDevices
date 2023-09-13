@@ -17,15 +17,15 @@
     "Info": {
       "CanInstallFirmware": true,
       "CanResetBoard": true,
-      "FirmwareBaseName": "kav_efis_fcu_raspberrypico",
+      "FirmwareBaseName": "mobiflight_template_raspberrypico",
       "FirmwareExtension": "uf2",
-      "FriendlyName": "Kav FCU/EFIS RaspiPico",
+      "FriendlyName": "MobiFlight Template RaspiPico",
       "LatestFirmwareVersion": "2.4.1",
-      "MobiFlightType": "Kav FCU/EFIS RaspiPico",
+      "MobiFlightType": "Mobiflight Template RaspiPico",
       "ResetFirmwareFile": "reset.raspberry_pico_flash_nuke.uf2",
       "CustomDeviceType": [
-        "KAV_LCD_EFIS",
-        "KAV_LCD_FCU"
+        "MOBIFLIGHT_TEMPLATE",
+        "MOBIFLIGHT_TEMPLATE2"
       ]
     },
     "ModuleLimits": {
@@ -204,3 +204,4 @@
       }
     ]
   }
+  
