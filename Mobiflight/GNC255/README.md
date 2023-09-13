@@ -1,0 +1,1 @@
+This custom device supports a 256x64 pixel OLED display with predifined outputs like the original GNC255.
