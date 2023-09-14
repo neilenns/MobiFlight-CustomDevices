@@ -10,8 +10,6 @@
 #include "HT1621.h"
 
 #define BUFFER_SIZE_MAX  16
-#define KAV_LCD_FCU      1
-#define TYPE_KAV_LCD_FCU "KAV_LCD_FCU"
 
 class KAV_A3XX_FCU_LCD
 {

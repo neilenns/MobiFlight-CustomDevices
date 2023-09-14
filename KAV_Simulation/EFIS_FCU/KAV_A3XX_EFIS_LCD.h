@@ -10,8 +10,6 @@
 #include "HT1621.h"
 
 #define BUFFER_SIZE_MAX   16
-#define KAV_LCD_EFIS      2
-#define TYPE_KAV_LCD_EFIS "KAV_LCD_EFIS"
 
 class KAV_A3XX_EFIS_LCD
 {
