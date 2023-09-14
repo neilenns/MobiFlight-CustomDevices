@@ -1,10 +1,10 @@
 #pragma once
 
 #include <Arduino.h>
-#include "MyCustomClass.h"
-#include "KAV_A3XX_FCU_LCD.h"
-#include "KAV_A3XX_EFIS_LCD.h"
-#include "GNC255.h"
+#include "../_template/MyCustomClass.h"
+#include "../KAV_Simulation/EFIS_FCU/KAV_A3XX_FCU_LCD.h"
+#include "../KAV_Simulation/EFIS_FCU/KAV_A3XX_EFIS_LCD.h"
+#include "../Mobiflight/GNC255/GNC255.h"
 
 enum {
     MY_CUSTOM_DEVICE_1 = 1,
