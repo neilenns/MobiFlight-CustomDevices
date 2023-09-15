@@ -66,9 +66,9 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         is used to store the type
     ********************************************************************************** */
     getStringFromEEPROM(adrType, parameter);
-    if (strcmp(parameter, MY_CUSTOM_TYPE_1) == 0)
+    if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE") == 0)
         _customType = MY_CUSTOM_DEVICE_1;
-    if (strcmp(parameter, MY_CUSTOM_TYPE_2) == 0)
+    if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE2") == 0)
         _customType = MY_CUSTOM_DEVICE_2;
 
     /* **********************************************************************************
