@@ -1,7 +1,6 @@
 #include "MFCustomDevice.h"
 #include "commandmessenger.h"
 #include "allocateMem.h"
-#include "MyCustomClass.h"
 #include "MFEEPROM.h"
 extern MFEEPROM MFeeprom;
 
