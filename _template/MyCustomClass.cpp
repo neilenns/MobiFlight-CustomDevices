@@ -1,4 +1,6 @@
 #include "MyCustomClass.h"
+#include "allocateMem.h"
+#include "commandmessenger.h"
 
 /* **********************************************************************************
     This is just the basic code to set up your custom device.
