@@ -64,6 +64,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _customType = KAV_LCD_EFIS;
     if (strcmp(parameter, "MOBIFLIGHT_GNC255") == 0)
         _customType = MOBIFLIGHT_GNC255;
+    if (strcmp(parameter, "4TM1637") == 0)
+        _customType = MOBIFLIGHT_4TM1637;
+    if (strcmp(parameter, "6TM1637") == 0)
+        _customType = MOBIFLIGHT_6TM1637;
     /* ******************************************************************************* */
 
     /* **********************************************************************************
@@ -271,23 +275,122 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _GNC255_OLED->attach();
 
         _initialized = true;
+    } else if (_customType == MOBIFLIGHT_4TM1637) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
+        if (!FitInMemory(sizeof(TM1637driver))) {
+            // Error Message to Connector
+            cmdMessenger.sendCmd(kStatus, F("Custom Device does not fit in Memory"));
+            return;
+        }
+        /* **********************************************************************************************
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
+        ********************************************************************************************** */
+        getStringFromEEPROM(adrPin, parameter);
+        /* **********************************************************************************************
+            split the pins up into single pins. As the number of pins could be different between
+            multiple devices, it is done here.
+        ********************************************************************************************** */
+        params = strtok_r(parameter, "|", &p);
+        _pin1  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin2  = atoi(params);
+
+        /* **********************************************************************************
+            Read the configuration from the EEPROM, copy it into a buffer.
+        ********************************************************************************** */
+        // getStringFromEEPROM(adrConfig, parameter);
+        /* **********************************************************************************
+            Split the config up into single parameter. As the number of parameters could be
+            different between multiple devices, it is done here.
+            This is just an example how to process the init string. Do NOT use
+            "," or ";" as delimiter for multiple parameters but e.g. "|"
+            For most customer devices it is not required.
+            In this case just delete the following
+        ********************************************************************************** */
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
+
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
+        _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 4);
+        _initialized = true;
+    } else if (_customType == MOBIFLIGHT_6TM1637) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
+        if (!FitInMemory(sizeof(TM1637driver))) {
+            // Error Message to Connector
+            cmdMessenger.sendCmd(kStatus, F("Custom Device does not fit in Memory"));
+            return;
+        }
+        /* **********************************************************************************************
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
+        ********************************************************************************************** */
+        getStringFromEEPROM(adrPin, parameter);
+        /* **********************************************************************************************
+            split the pins up into single pins. As the number of pins could be different between
+            multiple devices, it is done here.
+        ********************************************************************************************** */
+        params = strtok_r(parameter, "|", &p);
+        _pin1  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin2  = atoi(params);
+
+        /* **********************************************************************************
+            Read the configuration from the EEPROM, copy it into a buffer.
+        ********************************************************************************** */
+        // getStringFromEEPROM(adrConfig, parameter);
+        /* **********************************************************************************
+            Split the config up into single parameter. As the number of parameters could be
+            different between multiple devices, it is done here.
+            This is just an example how to process the init string. Do NOT use
+            "," or ";" as delimiter for multiple parameters but e.g. "|"
+            For most customer devices it is not required.
+            In this case just delete the following
+        ********************************************************************************** */
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
+
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
+        _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 6);
+        _initialized = true;
     }
 }
 
 void MFCustomDevice::detach()
 {
     _initialized = false;
-    if (_customType == MY_CUSTOM_DEVICE_1) {
+    if (_customType == MY_CUSTOM_DEVICE_1)
         _mydevice->detach();
-    } else if (_customType == MY_CUSTOM_DEVICE_2) {
+    else if (_customType == MY_CUSTOM_DEVICE_2)
         _mydevice->detach();
-    } else if (_customType == KAV_LCD_FCU) {
+    else if (_customType == KAV_LCD_FCU)
         _FCU_LCD->detach();
-    } else if (_customType == KAV_LCD_EFIS) {
+    else if (_customType == KAV_LCD_EFIS)
         _EFIS_LCD->detach();
-    } else if (_customType == MOBIFLIGHT_GNC255) {
+    else if (_customType == MOBIFLIGHT_GNC255)
         _GNC255_OLED->detach();
-    }
+    else if (_customType == MOBIFLIGHT_4TM1637)
+        _TM1637->detach();
+    else if (_customType == MOBIFLIGHT_6TM1637)
+        _TM1637->detach();
 }
 
 /* **********************************************************************************
@@ -306,17 +409,21 @@ void MFCustomDevice::update()
         Do something if required
         -> Nothing todo for this device
     ********************************************************************************** */
-    if (_customType == MY_CUSTOM_DEVICE_1) {
+    if (_customType == MY_CUSTOM_DEVICE_1)
         _mydevice->update();
-    } else if (_customType == MY_CUSTOM_DEVICE_2) {
+    else if (_customType == MY_CUSTOM_DEVICE_2)
         _mydevice->update();
-    } else if (_customType == KAV_LCD_FCU) {
-        //
-    } else if (_customType == KAV_LCD_EFIS) {
-        //
-    } else if (_customType == MOBIFLIGHT_GNC255) {
-        //
-    }
+    else if (_customType == KAV_LCD_FCU)
+        _FCU_LCD->update();
+    else if (_customType == KAV_LCD_EFIS)
+        _EFIS_LCD->update();
+    else if (_customType == MOBIFLIGHT_GNC255)
+        _GNC255_OLED->update()
+    else if (_customType == MOBIFLIGHT_4TM1637)
+        _TM1637->update();
+    else if (_customType == MOBIFLIGHT_6TM1637)
+        _TM1637->update();
+
 }
 
 /* **********************************************************************************
@@ -338,4 +445,8 @@ void MFCustomDevice::set(int8_t messageID, char *setPoint)
         _EFIS_LCD->set(messageID, setPoint);
     else if (_customType == MOBIFLIGHT_GNC255)
         _GNC255_OLED->set(messageID, setPoint);
+    else if (_customType == MOBIFLIGHT_4TM1637)
+        _TM1637->set(messageID, setPoint);
+    else if (_customType == MOBIFLIGHT_6TM1637)
+        _TM1637->set(messageID, setPoint);
 }

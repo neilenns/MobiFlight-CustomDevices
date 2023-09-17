@@ -46,7 +46,9 @@
       "MOBIFLIGHT_TEMPLATE",
       "KAV_EFIS",
       "KAV_FCU",
-      "MOBIFLIGHT_GNC255"
+      "MOBIFLIGHT_GNC255",
+      "4TM1637",
+      "6TM1637"
     ]
   },
   "ModuleLimits": {
