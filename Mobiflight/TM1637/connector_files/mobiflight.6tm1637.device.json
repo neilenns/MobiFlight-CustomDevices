@@ -1,0 +1,29 @@
+{
+  "$schema": "./mfdevice.schema.json",
+  "Info": {
+    "Label": "TM1637 Display 6 Segments",
+    "Type": "6TM1637",
+    "Author": "elral",
+    "URL": "https://github.com",
+    "Version": "0.0.1"
+  },
+  "Config": {
+    "Pins": [
+      "DIO",
+      "CLK"
+    ],
+    "isI2C": false
+  },
+  "MessageTypes": [
+    {
+      "id": 0,
+      "label": "Set Value",
+      "description": "$ value will be displayed"
+    },
+    {
+      "id": 1,
+      "label": "Set decimal point",
+      "description": "$ value will be set the decimal point at the choosen segment (1...6)"
+    }
+  ]
+}
