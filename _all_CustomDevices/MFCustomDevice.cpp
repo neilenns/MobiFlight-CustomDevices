@@ -293,10 +293,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             split the pins up into single pins. As the number of pins could be different between
             multiple devices, it is done here.
         ********************************************************************************************** */
-        params = strtok_r(parameter, "|", &p);
-        uint8_t _pin1  = atoi(params);
-        params = strtok_r(NULL, "|", &p);
-        uint8_t _pin2  = atoi(params);
+        params        = strtok_r(parameter, "|", &p);
+        uint8_t _pin1 = atoi(params);
+        params        = strtok_r(NULL, "|", &p);
+        uint8_t _pin2 = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
@@ -341,10 +341,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             split the pins up into single pins. As the number of pins could be different between
             multiple devices, it is done here.
         ********************************************************************************************** */
-        params = strtok_r(parameter, "|", &p);
-        uint8_t _pin1  = atoi(params);
-        params = strtok_r(NULL, "|", &p);
-        uint8_t _pin2  = atoi(params);
+        params        = strtok_r(parameter, "|", &p);
+        uint8_t _pin1 = atoi(params);
+        params        = strtok_r(NULL, "|", &p);
+        uint8_t _pin2 = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
@@ -413,17 +413,17 @@ void MFCustomDevice::update()
         _mydevice->update();
     else if (_customType == MY_CUSTOM_DEVICE_2)
         _mydevice->update();
-    else if (_customType == KAV_LCD_FCU)
-        //
-    else if (_customType == KAV_LCD_EFIS)
-        //
-    else if (_customType == MOBIFLIGHT_GNC255)
-        //
-    else if (_customType == MOBIFLIGHT_4TM1637)
-        //
-    else if (_customType == MOBIFLIGHT_6TM1637)
-        //
-
+    else if (_customType == KAV_LCD_FCU) {
+        // no update() function for this device
+    } else if (_customType == KAV_LCD_EFIS) {
+        // no update() function for this device
+    } else if (_customType == MOBIFLIGHT_GNC255) {
+        // no update() function for this device
+    } else if (_customType == MOBIFLIGHT_4TM1637) {
+        // no update() function for this device
+    } else if (_customType == MOBIFLIGHT_6TM1637) {
+        // no update() function for this device
+    }
 }
 
 /* **********************************************************************************
