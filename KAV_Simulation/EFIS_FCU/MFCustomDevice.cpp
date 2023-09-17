@@ -64,9 +64,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
 
     /* **********************************************************************************
         Read the Type from the EEPROM, copy it into a buffer and evaluate it
-        it's only required if your custom device handles multiple devices with
-        different contructors
-        the string get's NOT stored as this would need a lot of RAM, instead a variable
+        The string get's NOT stored as this would need a lot of RAM, instead a variable
         is used to store the type
     ********************************************************************************** */
     getStringFromEEPROM(adrType, parameter);
