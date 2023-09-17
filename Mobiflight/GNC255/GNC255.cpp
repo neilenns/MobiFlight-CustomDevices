@@ -3,15 +3,6 @@
 #include "allocateMem.h"
 #include "commandmessenger.h"
 
-/*
-struct Layout {
-    Label Value;
-    Label ValueLabel;
-    Label Station;
-    Label ModeComLabel;
-    Label ModeNavLabel;
-};
-*/
 Layout ComLayout = {
     {u8g2_font_logisoso22_tn, 22, {10, 32}},
     {u8g2_font_profont10_mr, 10, {0, 32}},
@@ -93,29 +84,29 @@ void GNC255::set(uint8_t messageID, const char *data)
     ********************************************************************************** */
     // do something according your messageID
     switch (messageID) {
-    case 0:
-        _stop();
-        break;
-
-    // set Active Frequency
-    case 1:
-        updateActiveFreq(data);
-        break;
-    // set Standby Frequency
-    case 2:
-        updateStandbyFreq(data);
-        break;
-    case 3:
-        updateActiveLabel(data);
-        break;
-    case 4:
-        updateStandbyLabel(data);
-        break;
-    case 5:
-        setMode(strcmp(data, "0") == 0);
-        break;
-    default:
-        break;
+        case -1:
+            _stop();
+        case -2:
+            _stop();
+        case 0:
+            break;
+        case 1: // set Active Frequency
+            updateActiveFreq(data);
+            break;
+        case 2: // set Standby Frequency
+            updateStandbyFreq(data);
+            break;
+        case 3: // set Active Label
+            updateActiveLabel(data);
+            break;
+        case 4: // set Standby Label
+            updateStandbyLabel(data);
+            break;
+        case 5: // set COM/NAV mode
+            setMode(strcmp(data, "0") == 0);
+            break;
+        default:
+            break;
     }
     _oledDisplay->sendBuffer();
 }
