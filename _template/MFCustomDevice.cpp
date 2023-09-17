@@ -68,12 +68,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE2") == 0)
         _customType = MY_CUSTOM_DEVICE_2;
 
-    /* **********************************************************************************
-        Next call the constructor of your custom device
-        adapt it to the needs of your constructor
-        if you have multiple classes, check for _customType which constructor
-        has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
-    ********************************************************************************** */
     if (_customType == 1) {
         /* **********************************************************************************
             Check if the device fits into the device buffer
@@ -89,7 +83,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         ********************************************************************************************** */
         getStringFromEEPROM(adrPin, parameter);
         /* **********************************************************************************************
-            split the pins up into single pins. As the number of pins could be different between
+            Split the pins up into single pins. As the number of pins could be different between
             multiple devices, it is done here.
         ********************************************************************************************** */
         params = strtok_r(parameter, "|", &p);

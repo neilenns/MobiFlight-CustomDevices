@@ -69,13 +69,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _customType = MOBIFLIGHT_6TM1637;
 
     /* **********************************************************************************
-        Next call the constructor of your custom device
-        adapt it to the needs of your constructor
-        if you have multiple classes, check for _customType which constructor
-        has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
-    ********************************************************************************** */
-
-    /* **********************************************************************************
         Check if the device fits into the device buffer
     ********************************************************************************** */
     if (!FitInMemory(sizeof(TM1637driver))) {
@@ -97,25 +90,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _pin1  = atoi(params);
         params = strtok_r(NULL, "|", &p);
         _pin2  = atoi(params);
-
-        /* **********************************************************************************
-            Read the configuration from the EEPROM, copy it into a buffer.
-        ********************************************************************************** */
-        // getStringFromEEPROM(adrConfig, parameter);
-        /* **********************************************************************************
-            Split the config up into single parameter. As the number of parameters could be
-            different between multiple devices, it is done here.
-            This is just an example how to process the init string. Do NOT use
-            "," or ";" as delimiter for multiple parameters but e.g. "|"
-            For most customer devices it is not required.
-            In this case just delete the following
-        ********************************************************************************** */
-        // uint16_t Parameter1;
-        // char    *Parameter2;
-        // params     = strtok_r(parameter, "|", &p);
-        // Parameter1 = atoi(params);
-        // params     = strtok_r(NULL, "|", &p);
-        // Parameter2 = params;
     }
 
     /* **********************************************************************************

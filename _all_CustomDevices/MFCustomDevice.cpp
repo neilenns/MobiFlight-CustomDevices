@@ -43,16 +43,26 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
     return true;
 }
 
+/* **********************************************************************************
+    Within the connector pins, a device name and a config string can be defined
+    These informations are stored in the EEPROM like for the other devices.
+    While reading the config from the EEPROM this function is called.
+    It is the first function which will be called for the custom device.
+    If it fits into the memory buffer, the constructor for the customer device
+    will be called
+********************************************************************************** */
+
 MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
+    /* **********************************************************************************
+        Do something which is required to setup your custom device
+    ********************************************************************************** */
     char *params, *p = NULL;
     char  parameter[MEMLEN_STRING_BUFFER];
 
     /* **********************************************************************************
-        read the Type from the EEPROM, copy it into a buffer and evaluate it
-        it's only required if your custom device handles multiple devices with
-        different contructors
-        the string get's NOT stored as this would need a lot of RAM, instead a variable
+        Read the Type from the EEPROM, copy it into a buffer and evaluate it
+        The string get's NOT stored as this would need a lot of RAM, instead a variable
         is used to store the type
     ********************************************************************************** */
     getStringFromEEPROM(adrType, parameter);
@@ -69,12 +79,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     if (strcmp(parameter, "6TM1637") == 0)
         _customType = MOBIFLIGHT_6TM1637;
 
-    /* **********************************************************************************
-         Next call the constructor of your custom device
-         adapt it to the needs of your constructor
-         if you have multiple classes, check for _customType which constructor
-         has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
-     ********************************************************************************** */
     if (_customType == MY_CUSTOM_DEVICE_1) {
         /* **********************************************************************************
             Check if the device fits into the device buffer
@@ -85,11 +89,11 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             return;
         }
         /* **********************************************************************************************
-            read the pins from the EEPROM, copy them into a buffer
+            Read the pins from the EEPROM, copy them into a buffer
         ********************************************************************************************** */
         getStringFromEEPROM(adrPin, parameter);
         /* **********************************************************************************************
-            split the pins up into single pins. As the number of pins could be different between
+            Split the pins up into single pins. As the number of pins could be different between
             multiple devices, it is done here.
         ********************************************************************************************** */
         params        = strtok_r(parameter, "|", &p);
@@ -100,7 +104,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         uint8_t _pin3 = atoi(params);
 
         /* **********************************************************************************
-            read the configuration from the EEPROM, copy it into a buffer.
+            Read the configuration from the EEPROM, copy it into a buffer.
         ********************************************************************************** */
         getStringFromEEPROM(adrConfig, parameter);
         /* **********************************************************************************
@@ -289,25 +293,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         uint8_t _pin2 = atoi(params);
 
         /* **********************************************************************************
-            Read the configuration from the EEPROM, copy it into a buffer.
-        ********************************************************************************** */
-        // getStringFromEEPROM(adrConfig, parameter);
-        /* **********************************************************************************
-            Split the config up into single parameter. As the number of parameters could be
-            different between multiple devices, it is done here.
-            This is just an example how to process the init string. Do NOT use
-            "," or ";" as delimiter for multiple parameters but e.g. "|"
-            For most customer devices it is not required.
-            In this case just delete the following
-        ********************************************************************************** */
-        // uint16_t Parameter1;
-        // char    *Parameter2;
-        // params     = strtok_r(parameter, "|", &p);
-        // Parameter1 = atoi(params);
-        // params     = strtok_r(NULL, "|", &p);
-        // Parameter2 = params;
-
-        /* **********************************************************************************
             Next call the constructor of your custom device
             adapt it to the needs of your constructor
         ********************************************************************************** */
@@ -335,25 +320,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         uint8_t _pin1 = atoi(params);
         params        = strtok_r(NULL, "|", &p);
         uint8_t _pin2 = atoi(params);
-
-        /* **********************************************************************************
-            Read the configuration from the EEPROM, copy it into a buffer.
-        ********************************************************************************** */
-        // getStringFromEEPROM(adrConfig, parameter);
-        /* **********************************************************************************
-            Split the config up into single parameter. As the number of parameters could be
-            different between multiple devices, it is done here.
-            This is just an example how to process the init string. Do NOT use
-            "," or ";" as delimiter for multiple parameters but e.g. "|"
-            For most customer devices it is not required.
-            In this case just delete the following
-        ********************************************************************************** */
-        // uint16_t Parameter1;
-        // char    *Parameter2;
-        // params     = strtok_r(parameter, "|", &p);
-        // Parameter1 = atoi(params);
-        // params     = strtok_r(NULL, "|", &p);
-        // Parameter2 = params;
 
         /* **********************************************************************************
             Next call the constructor of your custom device

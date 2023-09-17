@@ -73,12 +73,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     if (strcmp(parameter, "KAV_EFIS") == 0)
         _lcdType = KAV_LCD_EFIS;
 
-    /* **********************************************************************************
-         Next call the constructor of your custom device
-         adapt it to the needs of your constructor
-         if you have multiple classes, check for _customType which constructor
-         has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
-     ********************************************************************************** */
     if (_lcdType == KAV_LCD_FCU) {
         /* **********************************************************************************
             Check if the device fits into the device buffer
@@ -104,25 +98,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _pin2  = atoi(params);
         params = strtok_r(NULL, "|", &p);
         _pin3  = atoi(params);
-
-        /* **********************************************************************************
-            read the configuration from the EEPROM, copy it into a buffer and evaluate it.
-        ********************************************************************************** */
-        // getStringFromEEPROM(adrConfig, parameter);
-        /* **********************************************************************************
-            Split the config up into single parameter. As the number of parameters could be
-            different between multiple devices, it is done here.
-            This is just an example how to process the init string. Do NOT use
-            "," or ";" as delimiter for multiple parameters but e.g. "|"
-            For most customer devices it is not required.
-            In this case just delete the following
-        ********************************************************************************** */
-        // uint16_t Parameter1;
-        // char    *Parameter2;
-        // params     = strtok_r(parameter, "|", &p);
-        // Parameter1 = atoi(params);
-        // params     = strtok_r(NULL, "|", &p);
-        // Parameter2 = params;
 
         /* **********************************************************************************
             Next call the constructor of your custom device
@@ -156,26 +131,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _pin2  = atoi(params);
         params = strtok_r(NULL, "|", &p);
         _pin3  = atoi(params);
-
-        /* **********************************************************************************
-            read the configuration from the EEPROM, copy it into a buffer and evaluate it.
-        ********************************************************************************** */
-        // getStringFromEEPROM(adrConfig, parameter);
-
-        /* **********************************************************************************
-            Split the config up into single parameter. As the number of parameters could be
-            different between multiple devices, it is done here.
-            This is just an example how to process the init string. Do NOT use
-            "," or ";" as delimiter for multiple parameters but e.g. "|"
-            For most customer devices it is not required.
-            In this case just delete the following
-        ********************************************************************************** */
-        // uint16_t Parameter1;
-        // char    *Parameter2;
-        // params     = strtok_r(parameter, "|", &p);
-        // Parameter1 = atoi(params);
-        // params     = strtok_r(NULL, "|", &p);
-        // Parameter2 = params;
 
         /* **********************************************************************************
             Next call the constructor of your custom device
