@@ -68,15 +68,15 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     getStringFromEEPROM(adrType, parameter);
     if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE") == 0)
         _customType = MY_CUSTOM_DEVICE_1;
-    if (strcmp(parameter, "KAV_FCU") == 0)
+    else if (strcmp(parameter, "KAV_FCU") == 0)
         _customType = KAV_LCD_FCU;
-    if (strcmp(parameter, "KAV_EFIS") == 0)
+    else if (strcmp(parameter, "KAV_EFIS") == 0)
         _customType = KAV_LCD_EFIS;
-    if (strcmp(parameter, "MOBIFLIGHT_GNC255") == 0)
+    else if (strcmp(parameter, "MOBIFLIGHT_GNC255") == 0)
         _customType = MOBIFLIGHT_GNC255;
-    if (strcmp(parameter, "4TM1637") == 0)
+    else if (strcmp(parameter, "4TM1637") == 0)
         _customType = MOBIFLIGHT_4TM1637;
-    if (strcmp(parameter, "6TM1637") == 0)
+    else if (strcmp(parameter, "6TM1637") == 0)
         _customType = MOBIFLIGHT_6TM1637;
 
     if (_customType == MY_CUSTOM_DEVICE_1) {
@@ -327,6 +327,8 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         ********************************************************************************** */
         _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 6);
         _initialized = true;
+    } else {
+        cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
     }
 }
 

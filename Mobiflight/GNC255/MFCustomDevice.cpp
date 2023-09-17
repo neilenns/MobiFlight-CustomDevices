@@ -63,7 +63,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         is used to store the type
     ********************************************************************************************** */
     getStringFromEEPROM(adrType, parameter);
-    if (strcmp(parameter, "MOBIFLIGHT_GNC255") == 1) return;
+    if (strcmp(parameter, "MOBIFLIGHT_GNC255") == 1) {
+        cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
+        return;
+    }
 
     /* **********************************************************************************
         Check if the device fits into the device buffer

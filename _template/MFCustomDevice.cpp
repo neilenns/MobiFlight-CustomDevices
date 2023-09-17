@@ -181,8 +181,9 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
         _initialized = true;
+    } else {
+        cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
     }
-    /* ******************************************************************************* */
 }
 
 /* **********************************************************************************

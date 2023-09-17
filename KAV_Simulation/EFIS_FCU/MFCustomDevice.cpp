@@ -139,6 +139,8 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _EFIS_LCD = new (allocateMemory(sizeof(KAV_A3XX_EFIS_LCD))) KAV_A3XX_EFIS_LCD(_pin2, _pin3, _pin1);
         _EFIS_LCD->attach(_pin2, _pin3, _pin1);
         _initialized = true;
+    } else {
+        cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
     }
 }
 

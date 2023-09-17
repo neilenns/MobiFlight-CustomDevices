@@ -102,6 +102,8 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     } else if (_customType == MOBIFLIGHT_6TM1637) {
         _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 6);
         _initialized = true;
+    } else {
+        cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
     }
 }
 
