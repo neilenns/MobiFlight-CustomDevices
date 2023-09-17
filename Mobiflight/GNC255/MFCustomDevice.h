@@ -3,7 +3,6 @@
 #include <Arduino.h>
 #include "GNC255.h"
 
-
 class MFCustomDevice
 {
 public:

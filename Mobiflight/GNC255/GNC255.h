@@ -37,13 +37,13 @@ public:
     void set(uint8_t messageID, const char *setPoint);
 
 private:
-    //U8G2_SSD1322_NHD_256X64_F_4W_SW_SPI *_oledDisplay;
+    // U8G2_SSD1322_NHD_256X64_F_4W_SW_SPI *_oledDisplay;
     U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI *_oledDisplay;
-    bool    _initialised;
-    uint8_t _clk, _data, _cs, _dc, _reset;
-    bool    _hasChanged;
-    char    activeFrequency[8]  = "123.456";
-    char    standbyFrequency[8] = "123.456";
+    bool                                 _initialised;
+    uint8_t                              _clk, _data, _cs, _dc, _reset;
+    bool                                 _hasChanged;
+    char                                 activeFrequency[8]  = "123.456";
+    char                                 standbyFrequency[8] = "123.456";
 
     void _update();
     void _stop();

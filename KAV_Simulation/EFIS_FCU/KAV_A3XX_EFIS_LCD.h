@@ -9,7 +9,7 @@
 #include "Arduino.h"
 #include "HT1621.h"
 
-#define BUFFER_SIZE_MAX   16
+#define BUFFER_SIZE_MAX 16
 
 class KAV_A3XX_EFIS_LCD
 {

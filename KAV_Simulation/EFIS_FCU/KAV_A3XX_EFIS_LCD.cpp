@@ -69,7 +69,7 @@ void KAV_A3XX_EFIS_LCD::setDot(bool enabled)
 
 void KAV_A3XX_EFIS_LCD::showStd(uint16_t state)
 {
-    //if (state == 1) {
+    // if (state == 1) {
     if (state) {
         displayDigit(DIGIT_ONE, 5);
         displayDigit(DIGIT_TWO, 11);

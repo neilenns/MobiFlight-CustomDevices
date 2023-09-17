@@ -48,22 +48,22 @@ void MyCustomClass::set(int8_t messageID, char *setPoint)
 
     // do something according your messageID
     switch (messageID) {
-        case -1:
-            // tbd., get's called when Mobiflight shuts down
-        case -2:
-            // tbd., get's called when PowerSavingMode is entered
-        case 0:
-            output = (uint16_t)data;
-            data   = output;
-            break;
-        case 1:
-            /* code */
-            break;
-        case 2:
-            /* code */
-            break;
-        default:
-            break;
+    case -1:
+        // tbd., get's called when Mobiflight shuts down
+    case -2:
+        // tbd., get's called when PowerSavingMode is entered
+    case 0:
+        output = (uint16_t)data;
+        data   = output;
+        break;
+    case 1:
+        /* code */
+        break;
+    case 2:
+        /* code */
+        break;
+    default:
+        break;
     }
 }
 

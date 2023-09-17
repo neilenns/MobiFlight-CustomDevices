@@ -306,12 +306,12 @@ void MFCustomDevice::update()
         Do something if required
         -> Nothing todo for this device
     ********************************************************************************** */
-   if (_customType == MY_CUSTOM_DEVICE_1) {
+    if (_customType == MY_CUSTOM_DEVICE_1) {
         _mydevice->update();
     } else if (_customType == MY_CUSTOM_DEVICE_2) {
         _mydevice->update();
     } else if (_customType == KAV_LCD_FCU) {
-       //
+        //
     } else if (_customType == KAV_LCD_EFIS) {
         //
     } else if (_customType == MOBIFLIGHT_GNC255) {

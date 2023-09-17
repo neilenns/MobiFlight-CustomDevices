@@ -101,7 +101,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
         ********************************************************************************** */
-        //getStringFromEEPROM(adrConfig, parameter);
+        // getStringFromEEPROM(adrConfig, parameter);
         /* **********************************************************************************
             Split the config up into single parameter. As the number of parameters could be
             different between multiple devices, it is done here.
@@ -110,13 +110,12 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             For most customer devices it is not required.
             In this case just delete the following
         ********************************************************************************** */
-        //uint16_t Parameter1;
-        //char    *Parameter2;
-        //params     = strtok_r(parameter, "|", &p);
-        //Parameter1 = atoi(params);
-        //params     = strtok_r(NULL, "|", &p);
-        //Parameter2 = params;
-
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
     }
 
     /* **********************************************************************************
@@ -130,7 +129,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 6);
         _initialized = true;
     }
-
 }
 
 void MFCustomDevice::detach()

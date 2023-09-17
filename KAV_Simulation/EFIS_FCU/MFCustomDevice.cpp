@@ -38,8 +38,8 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
         if (counter >= MEMLEN_STRING_BUFFER) {                  // nameBuffer will be exceeded
             return false;                                       // abort copying to buffer
         }
-    } while (temp != '.');                                      // reads until limiter '.' and locates the next free buffer position
-    buffer[counter - 1] = 0x00;                                 // replace '.' by NULL, terminates the string
+    } while (temp != '.');      // reads until limiter '.' and locates the next free buffer position
+    buffer[counter - 1] = 0x00; // replace '.' by NULL, terminates the string
     return true;
 }
 
@@ -161,7 +161,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             read the configuration from the EEPROM, copy it into a buffer and evaluate it.
         ********************************************************************************** */
         // getStringFromEEPROM(adrConfig, parameter);
-        
+
         /* **********************************************************************************
             Split the config up into single parameter. As the number of parameters could be
             different between multiple devices, it is done here.
