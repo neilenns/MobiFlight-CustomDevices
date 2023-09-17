@@ -414,15 +414,15 @@ void MFCustomDevice::update()
     else if (_customType == MY_CUSTOM_DEVICE_2)
         _mydevice->update();
     else if (_customType == KAV_LCD_FCU)
-        _FCU_LCD->update();
+        //
     else if (_customType == KAV_LCD_EFIS)
-        _EFIS_LCD->update();
+        //
     else if (_customType == MOBIFLIGHT_GNC255)
-        _GNC255_OLED->update()
+        //
     else if (_customType == MOBIFLIGHT_4TM1637)
-        _TM1637->update();
+        //
     else if (_customType == MOBIFLIGHT_6TM1637)
-        _TM1637->update();
+        //
 
 }
 
