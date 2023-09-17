@@ -2,7 +2,7 @@
   "$schema": "./mfdevice.schema.json",
   "Info": {
     "Label": "TM1637 Display 6 Segments",
-    "Type": "6TM1637",
+    "Type": "MOBIFLIGHT_6TM1637",
     "Author": "elral",
     "URL": "https://github.com",
     "Version": "0.0.1"
