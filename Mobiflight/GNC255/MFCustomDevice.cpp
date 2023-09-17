@@ -37,6 +37,7 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
     buffer[counter - 1] = 0x00; // replace '.' by NULL, terminates the string
     return true;
 }
+
 /* **********************************************************************************
     Within the connector pins, a device name and a config string can be defined
     These informations are stored in the EEPROM like for the other devices.
@@ -48,7 +49,6 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
 
 MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
-    _initialized = true;
     /* **********************************************************************************
         Do something which is required to setup your custom device
     ********************************************************************************** */
@@ -58,7 +58,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     uint8_t _clk, _data, _cs, _dc, _reset;
 
     /* **********************************************************************************************
-        read the Type from the EEPROM, copy it into a buffer and evaluate it.
+        Read the Type from the EEPROM, copy it into a buffer and evaluate it.
         it's required if your custom device handles multiple devices with
         different contructors and for checking if it fits to the FW
         The string get's NOT stored as this would need a lot of RAM, instead a variable
@@ -76,8 +76,8 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         return;
     }
     /* **********************************************************************************************
-        read the pins from the EEPROM, copy them into a buffer and split them up die single pins
-        As the number of pins could be different between multiple devices, it is done here.
+        Read the pins from the EEPROM, copy them into a buffer and split them up die single pins
+        If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
     ********************************************************************************************** */
     getStringFromEEPROM(adrPin, parameter);
     params = strtok_r(parameter, "|", &p);
@@ -92,6 +92,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     _reset = atoi(params);
 
     /* **********************************************************************************
+        Read the configuration from the EEPROM, copy it into a buffer.
+    ********************************************************************************** */
+    // getStringFromEEPROM(adrConfig, parameter);
+    /* **********************************************************************************
         read the configuration from the EEPROM, copy it into a buffer and evaluate it.
         split the config up into single parameter. As the number of parameters could be
         different between multiple devices, it is done here.
@@ -100,7 +104,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         For most customer devices it is not required.
         In this case just delete the following
     ********************************************************************************** */
-    // getStringFromEEPROM(adrConfig, parameter);
     // uint16_t Parameter1;
     // char    *Parameter2;
     // params     = strtok_r(parameter, "|", &p);

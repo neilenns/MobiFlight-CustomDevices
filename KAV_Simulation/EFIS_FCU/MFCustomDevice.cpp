@@ -43,27 +43,27 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
     return true;
 }
 
+/* **********************************************************************************
+    Within the connector pins, a device name and a config string can be defined
+    These informations are stored in the EEPROM like for the other devices.
+    While reading the config from the EEPROM this function is called.
+    It is the first function which will be called for the custom device.
+    If it fits into the memory buffer, the constructor for the customer device
+    will be called
+********************************************************************************** */
+
 MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
-    _initialized = true;
+    /* **********************************************************************************
+        Do something which is required to setup your custom device
+    ********************************************************************************** */
 
     char   *params, *p = NULL;
     char    parameter[MEMLEN_STRING_BUFFER];
     uint8_t _pin1, _pin2, _pin3;
 
-    /* **********************************************************************************************
-        read the pins from the EEPROM, copy them into a buffer and split them up into single pins
-    ********************************************************************************************** */
-    getStringFromEEPROM(adrPin, parameter);
-    params = strtok_r(parameter, "|", &p);
-    _pin1  = atoi(params);
-    params = strtok_r(NULL, "|", &p);
-    _pin2  = atoi(params);
-    params = strtok_r(NULL, "|", &p);
-    _pin3  = atoi(params);
-
     /* **********************************************************************************
-        read the Type from the EEPROM, copy it into a buffer and evaluate it
+        Read the Type from the EEPROM, copy it into a buffer and evaluate it
         it's only required if your custom device handles multiple devices with
         different contructors
         the string get's NOT stored as this would need a lot of RAM, instead a variable
@@ -74,16 +74,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _lcdType = KAV_LCD_FCU;
     if (strcmp(parameter, "KAV_EFIS") == 0)
         _lcdType = KAV_LCD_EFIS;
-    /* ******************************************************************************* */
-
-    /* **********************************************************************************
-        read the configuration from the EEPROM, copy it into a buffer and evaluate it.
-        This is just an example how to process the init string. Do NOT use
-        "," or ";" as delimiter for multiple parameters but e.g. "|"
-        For most customer devices it is not required.
-        In this case just delete the following
-        -> no config parameter required for this device
-    ********************************************************************************** */
 
     /* **********************************************************************************
          Next call the constructor of your custom device
@@ -92,21 +82,110 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
          has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
      ********************************************************************************** */
     if (_lcdType == KAV_LCD_FCU) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
         if (!FitInMemory(sizeof(KAV_A3XX_FCU_LCD))) {
             // Error Message to Connector
             cmdMessenger.sendCmd(kStatus, F("FCU LCD does not fit in Memory"));
             return;
         }
+
+        /* **********************************************************************************************
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
+        ********************************************************************************************** */
+        getStringFromEEPROM(adrPin, parameter);
+        /* **********************************************************************************************
+            split the pins up into single pins. As the number of pins could be different between
+            multiple devices, it is done here.
+        ********************************************************************************************** */
+        params = strtok_r(parameter, "|", &p);
+        _pin1  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin2  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin3  = atoi(params);
+
+        /* **********************************************************************************
+            read the configuration from the EEPROM, copy it into a buffer and evaluate it.
+        ********************************************************************************** */
+        // getStringFromEEPROM(adrConfig, parameter);
+        /* **********************************************************************************
+            Split the config up into single parameter. As the number of parameters could be
+            different between multiple devices, it is done here.
+            This is just an example how to process the init string. Do NOT use
+            "," or ";" as delimiter for multiple parameters but e.g. "|"
+            For most customer devices it is not required.
+            In this case just delete the following
+        ********************************************************************************** */
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
+
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
         _FCU_LCD = new (allocateMemory(sizeof(KAV_A3XX_FCU_LCD))) KAV_A3XX_FCU_LCD(_pin2, _pin3, _pin1);
         _FCU_LCD->attach(_pin2, _pin3, _pin1);
+        _initialized = true;
     } else if (_lcdType == KAV_LCD_EFIS) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
         if (!FitInMemory(sizeof(KAV_A3XX_FCU_LCD))) {
             // Error Message to Connector
             cmdMessenger.sendCmd(kStatus, F("EFIS LCD does not fit in Memory"));
             return;
         }
+
+        /* **********************************************************************************************
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
+        ********************************************************************************************** */
+        getStringFromEEPROM(adrPin, parameter);
+        /* **********************************************************************************************
+            split the pins up into single pins. As the number of pins could be different between
+            multiple devices, it is done here.
+        ********************************************************************************************** */
+        params = strtok_r(parameter, "|", &p);
+        _pin1  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin2  = atoi(params);
+        params = strtok_r(NULL, "|", &p);
+        _pin3  = atoi(params);
+
+        /* **********************************************************************************
+            read the configuration from the EEPROM, copy it into a buffer and evaluate it.
+        ********************************************************************************** */
+        // getStringFromEEPROM(adrConfig, parameter);
+        
+        /* **********************************************************************************
+            Split the config up into single parameter. As the number of parameters could be
+            different between multiple devices, it is done here.
+            This is just an example how to process the init string. Do NOT use
+            "," or ";" as delimiter for multiple parameters but e.g. "|"
+            For most customer devices it is not required.
+            In this case just delete the following
+        ********************************************************************************** */
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
+
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
         _EFIS_LCD = new (allocateMemory(sizeof(KAV_A3XX_EFIS_LCD))) KAV_A3XX_EFIS_LCD(_pin2, _pin3, _pin1);
         _EFIS_LCD->attach(_pin2, _pin3, _pin1);
+        _initialized = true;
     }
 }
 

@@ -49,7 +49,6 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
 
 MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
-    _initialized = true;
     /* **********************************************************************************
         Do something which is required to setup your custom device
     ********************************************************************************** */
@@ -59,7 +58,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     uint8_t _pin1, _pin2, _pin3;
 
     /* **********************************************************************************
-        read the Type from the EEPROM, copy it into a buffer and evaluate it
+        Read the Type from the EEPROM, copy it into a buffer and evaluate it
         it's only required if your custom device handles multiple devices with
         different contructors
         the string get's NOT stored as this would need a lot of RAM, instead a variable
@@ -78,13 +77,17 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         has to be called (e.g. if (_customType == MY_CUSTOM_DEVICE_1) ....)
     ********************************************************************************** */
     if (_customType == 1) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
         if (!FitInMemory(sizeof(MyCustomClass))) {
             // Error Message to Connector
             cmdMessenger.sendCmd(kStatus, F("Custom Device does not fit in Memory"));
             return;
         }
         /* **********************************************************************************************
-            read the pins from the EEPROM, copy them into a buffer
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
         ********************************************************************************************** */
         getStringFromEEPROM(adrPin, parameter);
         /* **********************************************************************************************
@@ -99,11 +102,11 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _pin3  = atoi(params);
 
         /* **********************************************************************************
-            read the configuration from the EEPROM, copy it into a buffer.
+            Read the configuration from the EEPROM, copy it into a buffer.
         ********************************************************************************** */
         getStringFromEEPROM(adrConfig, parameter);
         /* **********************************************************************************
-            split the config up into single parameter. As the number of parameters could be
+            Split the config up into single parameter. As the number of parameters could be
             different between multiple devices, it is done here.
             This is just an example how to process the init string. Do NOT use
             "," or ";" as delimiter for multiple parameters but e.g. "|"
@@ -117,6 +120,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         params     = strtok_r(NULL, "|", &p);
         Parameter2 = params;
 
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
         _mydevice = new (allocateMemory(sizeof(MyCustomClass))) MyCustomClass(_pin1, _pin2);
@@ -124,14 +131,20 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
+        _initialized = true;
     } else if (_customType == 2) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
         if (!FitInMemory(sizeof(MyCustomClass))) {
             // Error Message to Connector
             cmdMessenger.sendCmd(kStatus, F("Custom Device does not fit in Memory"));
             return;
         }
+
         /* **********************************************************************************************
-            read the pins from the EEPROM, copy them into a buffer
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
         ********************************************************************************************** */
         getStringFromEEPROM(adrPin, parameter);
         /* **********************************************************************************************
@@ -146,7 +159,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _pin3  = atoi(params);
 
         /* **********************************************************************************
-            read the configuration from the EEPROM, copy it into a buffer.
+            Read the configuration from the EEPROM, copy it into a buffer.
         ********************************************************************************** */
         getStringFromEEPROM(adrConfig, parameter);
         /* **********************************************************************************
@@ -164,6 +177,10 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         params     = strtok_r(NULL, "|", &p);
         Parameter2 = params;
 
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
         _mydevice = new (allocateMemory(sizeof(MyCustomClass))) MyCustomClass(_pin1, _pin2);
@@ -171,6 +188,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
+        _initialized = true;
     }
     /* ******************************************************************************* */
 }
