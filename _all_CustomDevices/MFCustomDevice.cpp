@@ -294,9 +294,9 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             multiple devices, it is done here.
         ********************************************************************************************** */
         params = strtok_r(parameter, "|", &p);
-        _pin1  = atoi(params);
+        uint8_t _pin1  = atoi(params);
         params = strtok_r(NULL, "|", &p);
-        _pin2  = atoi(params);
+        uint8_t _pin2  = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
@@ -342,9 +342,9 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             multiple devices, it is done here.
         ********************************************************************************************** */
         params = strtok_r(parameter, "|", &p);
-        _pin1  = atoi(params);
+        uint8_t _pin1  = atoi(params);
         params = strtok_r(NULL, "|", &p);
-        _pin2  = atoi(params);
+        uint8_t _pin2  = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
