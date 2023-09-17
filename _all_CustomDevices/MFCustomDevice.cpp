@@ -68,16 +68,6 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _customType = MOBIFLIGHT_4TM1637;
     if (strcmp(parameter, "6TM1637") == 0)
         _customType = MOBIFLIGHT_6TM1637;
-    /* ******************************************************************************* */
-
-    /* **********************************************************************************
-        read the configuration from the EEPROM, copy it into a buffer and evaluate it.
-        This is just an example how to process the init string. Do NOT use
-        "," or ";" as delimiter for multiple parameters but e.g. "|"
-        For most customer devices it is not required.
-        In this case just delete the following
-        -> no config parameter required for this device
-    ********************************************************************************** */
 
     /* **********************************************************************************
          Next call the constructor of your custom device
