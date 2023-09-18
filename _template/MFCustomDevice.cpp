@@ -68,7 +68,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
     if (strcmp(parameter, "MOBIFLIGHT_TEMPLATE2") == 0)
         _customType = MY_CUSTOM_DEVICE_2;
 
-    if (_customType == 1) {
+    if (_customType == MY_CUSTOM_DEVICE_1) {
         /* **********************************************************************************
             Check if the device fits into the device buffer
         ********************************************************************************** */
@@ -124,7 +124,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();
         _initialized = true;
-    } else if (_customType == 2) {
+    } else if (_customType == MY_CUSTOM_DEVICE_2) {
         /* **********************************************************************************
             Check if the device fits into the device buffer
         ********************************************************************************** */
@@ -194,9 +194,9 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
 void MFCustomDevice::detach()
 {
     _initialized = false;
-    if (_customType == 1) {
+    if (_customType == MY_CUSTOM_DEVICE_1) {
         _mydevice->detach();
-    } else if (_customType == 2) {
+    } else if (_customType == MY_CUSTOM_DEVICE_2) {
         _mydevice->detach();
     }
 }
@@ -216,9 +216,9 @@ void MFCustomDevice::update()
     /* **********************************************************************************
         Do something if required
     ********************************************************************************** */
-    if (_customType == 1) {
+    if (_customType == MY_CUSTOM_DEVICE_1) {
         _mydevice->update();
-    } else if (_customType == 2) {
+    } else if (_customType == MY_CUSTOM_DEVICE_2) {
         _mydevice->update();
     }
 }
@@ -232,9 +232,9 @@ void MFCustomDevice::set(int8_t messageID, char *setPoint)
 {
     if (!_initialized) return;
 
-    if (_customType == 1) {
+    if (_customType == MY_CUSTOM_DEVICE_1) {
         _mydevice->set(messageID, setPoint);
-    } else if (_customType == 2) {
+    } else if (_customType == MY_CUSTOM_DEVICE_2) {
         _mydevice->set(messageID, setPoint);
     }
 }
