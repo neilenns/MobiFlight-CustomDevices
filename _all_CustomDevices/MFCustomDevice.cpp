@@ -78,6 +78,8 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         _customType = MOBIFLIGHT_4TM1637;
     else if (strcmp(parameter, "6TM1637") == 0)
         _customType = MOBIFLIGHT_6TM1637;
+    else if (strcmp(parameter, "MOBIFLIGHT_GENERICI2C") == 0)
+        _customType = MOBIFLIGHT_GENERICI2C;
 
     if (_customType == MY_CUSTOM_DEVICE_1) {
         /* **********************************************************************************
@@ -327,6 +329,57 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         ********************************************************************************** */
         _TM1637      = new (allocateMemory(sizeof(TM1637))) TM1637(_pin1, _pin2, 6);
         _initialized = true;
+    } else if(_customType == MOBIFLIGHT_GENERICI2C) {
+        /* **********************************************************************************
+            Check if the device fits into the device buffer
+        ********************************************************************************** */
+        if (!FitInMemory(sizeof(GenericI2C))) {
+            // Error Message to Connector
+            cmdMessenger.sendCmd(kStatus, F("Custom Device does not fit in Memory"));
+            return;
+        }
+        /* **********************************************************************************************
+            Read the pins from the EEPROM, copy them into a buffer
+            If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
+        ********************************************************************************************** */
+        getStringFromEEPROM(adrPin, parameter);
+        /* **********************************************************************************************
+            Split the pins up into single pins. As the number of pins could be different between
+            multiple devices, it is done here.
+        ********************************************************************************************** */
+        params = strtok_r(parameter, "|", &p);
+        _pin1  = atoi(params);
+
+        /* **********************************************************************************
+            Read the configuration from the EEPROM, copy it into a buffer.
+        ********************************************************************************** */
+        // getStringFromEEPROM(adrConfig, parameter);
+        /* **********************************************************************************
+            Split the config up into single parameter. As the number of parameters could be
+            different between multiple devices, it is done here.
+            This is just an example how to process the init string. Do NOT use
+            "," or ";" as delimiter for multiple parameters but e.g. "|"
+            For most customer devices it is not required.
+            In this case just delete the following
+        ********************************************************************************** */
+        // uint16_t Parameter1;
+        // char    *Parameter2;
+        // params     = strtok_r(parameter, "|", &p);
+        // Parameter1 = atoi(params);
+        // params     = strtok_r(NULL, "|", &p);
+        // Parameter2 = params;
+
+        /* **********************************************************************************
+            Next call the constructor of your custom device
+            adapt it to the needs of your constructor
+        ********************************************************************************** */
+        // In most cases you need only one of the following functions
+        // depending on if the constuctor takes the variables or a separate function is required
+        _myGenericI2C = new (allocateMemory(sizeof(GenericI2C))) GenericI2C(_pin1);
+        // if your custom device does not need a separate begin() function, delete the following
+        // or this function could be called from the custom constructor or attach() function
+        _myGenericI2C->begin();
+        _initialized = true;
     } else {
         cmdMessenger.sendCmd(kStatus, F("Custom Device is not supported by this firmware version"));
     }
@@ -349,6 +402,8 @@ void MFCustomDevice::detach()
         _TM1637->detach();
     else if (_customType == MOBIFLIGHT_6TM1637)
         _TM1637->detach();
+    else if(_customType == MOBIFLIGHT_GENERICI2C)
+        _myGenericI2C->detach();
 }
 
 /* **********************************************************************************
@@ -381,6 +436,8 @@ void MFCustomDevice::update()
         // no update() function for this device
     } else if (_customType == MOBIFLIGHT_6TM1637) {
         // no update() function for this device
+    } else if (_customType == MOBIFLIGHT_GENERICI2C) {
+        // no update() function for this device
     }
 }
 
@@ -407,4 +464,6 @@ void MFCustomDevice::set(int8_t messageID, char *setPoint)
         _TM1637->set(messageID, setPoint);
     else if (_customType == MOBIFLIGHT_6TM1637)
         _TM1637->set(messageID, setPoint);
+    else if (_customType == MOBIFLIGHT_GENERICI2C)
+        _myGenericI2C->set(messageID, setPoint);
 }
