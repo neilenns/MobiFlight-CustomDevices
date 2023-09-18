@@ -348,7 +348,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
             multiple devices, it is done here.
         ********************************************************************************************** */
         params = strtok_r(parameter, "|", &p);
-        _pin1  = atoi(params);
+        uint8_t _addrI2C  = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM, copy it into a buffer.
@@ -375,7 +375,7 @@ MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrCo
         ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
-        _myGenericI2C = new (allocateMemory(sizeof(GenericI2C))) GenericI2C(_pin1);
+        _myGenericI2C = new (allocateMemory(sizeof(GenericI2C))) GenericI2C(_addrI2C);
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _myGenericI2C->begin();
