@@ -17,7 +17,7 @@
     "Info": {
       "CanInstallFirmware": true,
       "CanResetBoard": true,
-      "FirmwareBaseName": "mobiflight_tm1637_mega",
+      "FirmwareBaseName": "mobiflight_tm1637_raspberrypico",
       "FirmwareExtension": "uf2",
       "FriendlyName": "MobiFlight TM1637 RaspiPico",
       "LatestFirmwareVersion": "2.4.1",
