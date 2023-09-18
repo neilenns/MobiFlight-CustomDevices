@@ -1,7 +1,7 @@
 {
     "$schema": "./mfdevice.schema.json",
     "Info": {
-      "Label": "Mobiflight's template",
+      "Label": "Mobiflight's generic I2C",
       "Type": "MOBIFLIGHT_GENERICI2C",
       "Author": "Mobiflight",
       "URL": "https://github.com",
