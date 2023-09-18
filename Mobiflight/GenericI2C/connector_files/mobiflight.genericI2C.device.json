@@ -1,0 +1,29 @@
+{
+    "$schema": "./mfdevice.schema.json",
+    "Info": {
+      "Label": "Mobiflight's template",
+      "Type": "MOBIFLIGHT_GENERICI2C",
+      "Author": "Mobiflight",
+      "URL": "https://github.com",
+      "Version" : "1.0.0"
+    },
+    "Config": {
+      "Pins": [
+        "I2C address"
+      ],
+      "isI2C": true
+    },
+    "MessageTypes": [
+      {
+        "id": 0,
+        "label": "Show Speed Value",
+        "description": "$ will be displayed as Speed value"
+      },
+      {
+        "id": 1,
+        "label": "Show Heading Value",
+        "description": "$ will be displayed as Heading value"
+      }
+    ]
+  }
+  
