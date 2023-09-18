@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "TM1637.h"
 
-// only required if you have more than one custom device
+// only one entry required if you have only one custom device
 enum {
     MOBIFLIGHT_4TM1637 = 1,
     MOBIFLIGHT_6TM1637

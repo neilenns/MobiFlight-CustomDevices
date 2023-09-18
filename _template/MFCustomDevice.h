@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include "MyCustomClass.h"
 
-// only required if you have more than one custom device
+// only one entry required if you have only one custom device
 enum {
     MY_CUSTOM_DEVICE_1 = 1,
     MY_CUSTOM_DEVICE_2
