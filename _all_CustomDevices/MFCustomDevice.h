@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include "../_template/MyCustomClass.h"
 #include "../KAV_Simulation/EFIS_FCU/KAV_A3XX_FCU_LCD.h"
 #include "../KAV_Simulation/EFIS_FCU/KAV_A3XX_EFIS_LCD.h"
 #include "../Mobiflight/GNC255/GNC255.h"
@@ -9,8 +8,6 @@
 #include "../Mobiflight/GenericI2C/GenericI2C.h"
 
 enum {
-    MY_CUSTOM_DEVICE_1 = 1,
-    MY_CUSTOM_DEVICE_2,
     KAV_LCD_FCU,
     KAV_LCD_EFIS,
     MOBIFLIGHT_GNC255,
