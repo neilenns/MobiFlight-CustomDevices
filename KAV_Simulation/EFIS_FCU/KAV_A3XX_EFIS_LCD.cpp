@@ -167,12 +167,3 @@ void KAV_A3XX_EFIS_LCD::set(int8_t messageID, char *setPoint)
     else if (messageID == 2)
         showStd((uint16_t)data);
 }
-
-/*
-old structure
-
-       if (strcmp(cmd, "setQNH") == 0) showQNHValue((uint16_t)data);
-  else if (strcmp(cmd, "setQFE") == 0) showQFEValue((uint16_t)data);
-  else if (strcmp(cmd, "setStd") == 0) showStd((uint16_t)data);
-
-*/
