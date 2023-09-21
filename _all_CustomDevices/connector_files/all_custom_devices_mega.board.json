@@ -42,8 +42,6 @@
     "MobiFlightType": "All devices Mega",
     "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
     "CustomDeviceType": [
-      "MOBIFLIGHT_TEMPLATE",
-      "MOBIFLIGHT_TEMPLATE",
       "KAV_EFIS",
       "KAV_FCU",
       "MOBIFLIGHT_GNC255",
