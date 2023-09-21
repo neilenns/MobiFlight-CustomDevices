@@ -27,7 +27,6 @@ public:
 private:
     bool               getStringFromEEPROM(uint16_t addreeprom, char *buffer);
     bool               _initialized = false;
-    MyCustomClass     *_mydevice;
     KAV_A3XX_FCU_LCD  *_FCU_LCD;
     KAV_A3XX_EFIS_LCD *_EFIS_LCD;
     GNC255            *_GNC255_OLED;
