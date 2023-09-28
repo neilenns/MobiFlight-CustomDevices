@@ -434,27 +434,3 @@ void KAV_A3XX_FCU_LCD::set(int8_t messageID, char *setPoint)
     else if (messageID == 16)
         showSpeedValue((uint16_t)data);
 }
-
-/*
-old structure
-
-       if (strcmp(cmd, "setSpd")==0) setSpeedMode((uint16_t)data);
-  else if (strcmp(cmd, "setMach")==0) setMachMode((uint16_t)data);
-  else if (strcmp(cmd, "setHdg")==0) showHeadingValue((uint16_t)data);
-  else if (strcmp(cmd, "setAlt")==0) showAltitudeValue((uint32_t)data);
-  else if (strcmp(cmd, "setVS")==0) showVerticalValue((int16_t)data);
-  else if (strcmp(cmd, "setFPA")==0) showFPAValue((int8_t)data);
-  else if (strcmp(cmd, "setSpdDash")==0) setSpeedDashes((int8_t)data);
-  else if (strcmp(cmd, "setHdgDash")==0) setHeadingDashes((int8_t)data);
-  else if (strcmp(cmd, "setAltDash")==0) setAltitudeDashes((int8_t)data);
-  else if (strcmp(cmd, "setVSDash")==0) setVrtSpdDashes((int8_t)data);
-  else if (strcmp(cmd, "setSpdDot")==0) setSpeedDot((int8_t)data);
-  else if (strcmp(cmd, "setHdgDot")==0) setHeadingDot((int8_t)data);
-  else if (strcmp(cmd, "setAltDot")==0) setAltitudeDot((int8_t)data);
-  else if (strcmp(cmd, "toggleTrkHdg")==0) toggleTrkHdgMode((int8_t)data);
-  // New Entries
-  else if (strcmp(cmd, "setSpdLabel")==0) setSpeedLabel((int8_t)data);
-  else if (strcmp(cmd, "setMachLabel")==0) setMachLabel((int8_t)data);
-  else if (strcmp(cmd, "setSpdOnly")==0) showSpeedValue((uint16_t)data);
-
-*/
