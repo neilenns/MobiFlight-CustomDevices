@@ -4,8 +4,6 @@
       "Device": "atmega2560",
       "BaudRates": [ "115200" ],
       "Programmer": "wiring",
-      "FirmwareBaseName": "mobiflight_tm1637_mega",
-      "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
       "Timeout": 15000
     },
     "Connection": {
@@ -35,10 +33,14 @@
     ],
     "Info": {
       "CanInstallFirmware": true,
+      "CanResetBoard": true,
       "DelayAfterFirmwareUpdate": 0,
+      "FirmwareBaseName": "mobiflight_tm1637_mega",
+      "FirmwareExtension": "hex",
       "LatestFirmwareVersion": "2.4.1",
       "FriendlyName": "Mobiflight TM1637 Mega",
       "MobiFlightType": "Mobiflight TM1637 Mega",
+      "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
       "CustomDeviceType": [
         "MOBIFLIGHT_4TM1637",
         "MOBIFLIGHT_6TM1637"
