@@ -43,7 +43,7 @@ void GenericI2C::set(int8_t messageID, char *setPoint)
         Put in your code to enter this mode (e.g. clear a display)
     ********************************************************************************** */
     Wire.beginTransmission(_addrI2C);
-    Wire.print(messageID);
+    Wire.write(messageID);
     Wire.print(setPoint);
     Wire.endTransmission();
 }
