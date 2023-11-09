@@ -41,7 +41,7 @@
       "FriendlyName": "Mobiflight TM1637 Mega",
       "MobiFlightType": "Mobiflight TM1637 Mega",
       "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
-      "CustomDeviceType": [
+      "CustomDeviceTypes": [
         "MOBIFLIGHT_4TM1637",
         "MOBIFLIGHT_6TM1637"
       ]

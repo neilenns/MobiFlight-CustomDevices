@@ -41,7 +41,7 @@
     "FriendlyName": "Kav FCU/EFIS Mega",
     "MobiFlightType": "Kav FCU/EFIS Mega",
     "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
-    "CustomDeviceType": [
+    "CustomDeviceTypes": [
       "KAV_LCD_EFIS",
       "KAV_LCD_FCU"
     ]  

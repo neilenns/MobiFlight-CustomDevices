@@ -41,7 +41,7 @@
       "FriendlyName": "Mobiflight GenericI2C Mega",
       "MobiFlightType": "Mobiflight GenericI2C Mega",
       "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
-      "CustomDeviceType": [
+      "CustomDeviceTypes": [
         "MOBIFLIGHT_GENERICI2C"
       ]
     },

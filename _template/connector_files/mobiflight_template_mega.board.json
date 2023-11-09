@@ -41,7 +41,7 @@
       "FriendlyName": "Mobiflight Template Mega",
       "MobiFlightType": "Mobiflight Template Mega",
       "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
-      "CustomDeviceType": [
+      "CustomDeviceTypes": [
         "MOBIFLIGHT_TEMPLATE",
         "MOBIFLIGHT_TEMPLATE2"
       ]
