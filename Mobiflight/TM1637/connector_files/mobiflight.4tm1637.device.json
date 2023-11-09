@@ -3,8 +3,8 @@
   "Info": {
     "Label": "TM1637 Display 4 Segments",
     "Type": "MOBIFLIGHT_4TM1637",
-    "Author": "elral",
-    "URL": "https://github.com",
+    "Author": "GioCC",
+    "URL": "https://github.com/MobiFlight/MobiFlight-CustomDevices/tree/main/Mobiflight/TM1637",
     "Version": "0.0.1"
   },
   "Config": {
@@ -17,13 +17,28 @@
   "MessageTypes": [
     {
       "id": 0,
-      "label": "Set Value",
-      "description": "$ value will be displayed"
+      "label": "Set decimal point",
+      "description": "$ value will be set the decimal point at the choosen segment (1...4)"
     },
     {
       "id": 1,
-      "label": "Set decimal point",
-      "description": "$ value will be set the decimal point at the choosen segment (1...4)"
+      "label": "Set Speed Mode",
+      "description": "$ will be displayed as speed value"
+    },
+    {
+      "id": 2,
+      "label": "Set Mach Mode",
+      "description": "$ will be displayed as mach value"
+    },
+    {
+      "id": 3,
+      "label": "Show Heading Value",
+      "description": "$ will be displayed as mach value"
+    },
+    {
+      "id": 4,
+      "label": "SPD Mode",
+      "description": "$ will be displayed as mach value"
     }
   ]
 }
