@@ -1,0 +1,22 @@
+{
+  "name": "MobiFlight-CustomDevices",
+  "version": "1.0.0",
+  "description": "Collection of Custom Devices for MobiFlight.",
+  "keywords": "Mobiflight",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neilenns/MobiFlight-CustomDevicest"
+  },
+  "authors": [
+    {
+      "name": "Sebastian M",
+      "email": "support@mobiflight.com",
+      "url": "https://www.mobiflight.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "homepage": "https://www.mobiflight.com/",
+  "frameworks": "*",
+  "platforms": "*"
+}
